@@ -1,0 +1,26 @@
+/*
+	MCP3002 is Arduino Library for communicating with MCP3002 Analog to digital converter.
+	Based on the MCP3008 Library created by Uros Petrevski, Nodesign.net 2013
+	Released into the public domain.
+
+  
+	ported from Python code originaly written by Adafruit learning system for rPI :
+	http://learn.adafruit.com/send-raspberry-pi-data-to-cosm/python-script
+*/
+
+#ifndef MCP3002_h
+#define MCP3002_h
+
+#include "Arduino.h"
+
+class MCP3002
+{
+  public:
+    MCP3002(int clockpin, int mosipin, int misopin, int cspin);
+    int readADC(int adcnum);
+  private:
+      int _clockpin, _mosipin, _misopin, _cspin;
+};
+
+
+#endif
