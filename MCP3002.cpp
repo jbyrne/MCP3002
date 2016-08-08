@@ -38,7 +38,7 @@ int MCP3002::readADC(int adcnum) {
   digitalWrite(_clockpin, LOW); //  # start clock low
   digitalWrite(_cspin, LOW); //     # bring CS low
 
-  int commandout = adcnum*4;
+  int commandout = adcnum*4; // 4 added so that 1 is converted to 4, this makes both channels (0 and 1) usable
   commandout |= 0x18; //  # start bit + single-ended bit
   commandout <<= 3; //    # we only need to send 5 bits here
  
