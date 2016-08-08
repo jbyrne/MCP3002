@@ -1,10 +1,10 @@
 /*
-  Example for MCP3008 - Library for communicating with MCP3008 Analog to digital converter.
-  Created by Uros Petrevski, Nodesign.net 2013
+  Example for MCP3002 - Library for communicating with MCP3002 Analog to digital converter.
+  Based on the MCP3008 Library created by Uros Petrevski, Nodesign.net 2013
   Released into the public domain.
 */
 
-#include <MCP3008.h>
+#include <MCP3002.h>
 
 
 // define pin connections
@@ -13,8 +13,8 @@
 #define MOSI_PIN 11
 #define MISO_PIN 10
 
-// put pins inside MCP3008 constructor
-MCP3008 adc(CLOCK_PIN, MOSI_PIN, MISO_PIN, CS_PIN);
+// put pins inside MCP3002 constructor
+MCP3002 adc(CLOCK_PIN, MOSI_PIN, MISO_PIN, CS_PIN);
 
 void setup() {
  
@@ -29,16 +29,10 @@ void loop() {
   
   int val = adc.readADC(0); // read Chanel 0 from MCP3008 ADC
   Serial.println(val);
+  delay(1000);
+  int val = adc.readADC(1); // read Chanel 0 from MCP3008 ADC
+  Serial.println(val);
+  delay(1000);
   
-  
-  // iterate thru all channels
-  /*
-  for (int i=0; i<8; i++) {
-   int val = adc.readADC(i);
-   Serial.print(val);
-   Serial.print("\t");
-   }
-   Serial.println("");
-  */
   
 }
