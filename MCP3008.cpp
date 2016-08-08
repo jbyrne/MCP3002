@@ -1,16 +1,17 @@
 /*
-  MCP3008.cpp - Library for communicating with MCP3008 Analog to digital converter.
-  Created by Uros Petrevski, Nodesign.net 2013
-  Released into the public domain.
+	MCP3002 is Arduino Library for communicating with MCP3002 Analog to digital converter.
+	Based on the MCP3008 Library created by Uros Petrevski, Nodesign.net 2013
+	Released into the public domain.
+
   
-  ported from Python code originaly written by Adafruit learning system for rPI :
-  http://learn.adafruit.com/send-raspberry-pi-data-to-cosm/python-script
+	ported from Python code originaly written by Adafruit learning system for rPI :
+	http://learn.adafruit.com/send-raspberry-pi-data-to-cosm/python-script
 */
 
 #include "Arduino.h"
-#include "MCP3008.h"
+#include "MCP3002.h"
 
-MCP3008::MCP3008(int clockpin, int mosipin, int misopin, int cspin) {
+MCP3002::MCP3002(int clockpin, int mosipin, int misopin, int cspin) {
     
     // define SPI outputs and inputs for bitbanging
     
@@ -26,8 +27,8 @@ MCP3008::MCP3008(int clockpin, int mosipin, int misopin, int cspin) {
     
 }
 
-// read SPI data from MCP3008 chip, 8 possible adc's (0 thru 7)
-int MCP3008::readADC(int adcnum) {
+// read SPI data from MCP3002 chip, 8 possible adc's (0 thru 7)
+int MCP3002::readADC(int adcnum) {
 
   if ((adcnum > 7) || (adcnum < 0)) return -1; // Wrong adc address return -1
 
@@ -37,7 +38,7 @@ int MCP3008::readADC(int adcnum) {
   digitalWrite(_clockpin, LOW); //  # start clock low
   digitalWrite(_cspin, LOW); //     # bring CS low
 
-  int commandout = adcnum;
+  int commandout = adcnum*4;
   commandout |= 0x18; //  # start bit + single-ended bit
   commandout <<= 3; //    # we only need to send 5 bits here
  
@@ -67,5 +68,3 @@ int MCP3008::readADC(int adcnum) {
   adcout >>= 1; //      # first bit is 'null' so drop it
   return adcout;
 }
-
-
